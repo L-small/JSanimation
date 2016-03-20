@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="800" height="400"></canvas>
+	<script src="utils.js"></script>
+	<script src="arrow.js"></script>
+	<script>
+		window.onload = function(){
+			var canvas = document.getElementById('canvas'),
+			context = canvas.getContext('2d'),
+			mouse = utils.captureMouse(canvas),
+			arrow = new Arrow();
+
+			arrow.x = canvas.width / 2;
+			arrow.y = canvas.height / 2;
+
+			(function drowFrame(){
+				window.requestAnimationFrame(drowFrame,canvas);//在设定好的时间清除canvas，并绘制新的
+				context.clearRect(0,0,canvas.width,canvas.height);//清理canvas区域内的东西
+
+				var dx = mouse.x - arrow.x;//邻边的长
+				var dy = mouse.y - arrow.y;//对边的高
+
+				arrow.rotation = Math.atan2(dy,dx);//反向求角度
+				arrow.draw(context);
+			}())
+		}
+	</script>
+</body>
+</html>

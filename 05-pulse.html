@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="800" height="400"></canvas>
+	<script src="utils.js"></script>
+	<script src="ball.js"></script>
+	<script>
+		window.onload = function(){
+			var canvas = document.getElementById('canvas'),
+			context = canvas.getContext('2d'),
+			ball = new Ball(),
+			angle = 0,
+			centerScale = 1,
+			range = 1500,
+			speed = 0.05;
+
+			ball.x = canvas.width / 2;
+			ball.y = canvas.height / 2;
+
+			(function drawFrame(){
+				window.requestAnimationFrame(drawFrame,canvas);
+				context.clearRect(0,0,canvas.width,canvas.height);
+				console.log(ball.scaleX)
+				console.log(ball.scaleY)
+
+				ball.scaleX = ball.scaleY = centerScale + Math.sin(angle) * range;
+				angle += speed;
+				ball.draw(context);
+			}())
+		}
+	</script>
+</body>
+</html>
