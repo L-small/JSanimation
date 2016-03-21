@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="800" height="400"></canvas>
+	<script>
+		window.onload = function(){
+			var canvas = document.getElementById('canvas');
+			var context = canvas.getContext('2d');
+			
+			for (var i = 0; i < canvas.width; i+=10) {
+				for (var j = 0; j < canvas.height; j+=10) {
+					context.fillStyle = (i % 20 === 0) ? "#f00" : ((i % 30 === 0) ? "#0f0" : "#00f");
+					context.fillRect(i,j,10,10);
+				}
+			}
+			var imagedata = context.getImageData(0,0,canvas.width,canvas.height),
+			pixels = imagedata.data;
+
+			for (var offset = 0,len = pixels.length;offset < len;offset+=4) {
+				pixels[offset] = 255 - pixels[offset];
+				pixels[offset] = 255 - pixels[offset + 1];
+				pixels[offset] = 255 - pixels[offset + 2];
+			}
+			context.putImageData(imagedata,0,0);
+		}
+	</script>
+</body>
+</html>
