@@ -20,7 +20,7 @@
 			var imagedata = context.getImageData(0,0,canvas.width,canvas.height),
 			pixels = imagedata.data;
 
-			for (var offset = 0,len = pixels.length;offset < len;offset+=4) {
+			for (var offset = 0,len = pixels.length;offset < len;offsetr+=4) {
 				pixels[offset] = 255 - pixels[offset];
 				pixels[offset] = 255 - pixels[offset + 1];
 				pixels[offset] = 255 - pixels[offset + 2];
